@@ -1,18 +1,34 @@
+"""implementing queue using stacks"""
+import queue
+
 class MyQueue:
-
+    """class my queue"""
     def __init__(self):
-
+        self.stack1 = queue.LifoQueue
+        self.stack2 = queue.LifoQueue
 
     def push(self, x: int) -> None:
-
+        self.stack1.pop(x)
 
     def pop(self) -> int:
-
+        while not self.stack1.empty():
+            self.stack2.put(self.stack1.get())
+        el = self.stack2.get()
+        while not self.stack2.empty():
+            self.stack1.put(self.stack2.get())
 
     def peek(self) -> int:
-
+        while not self.stack1.empty():
+            self.stack2.put(self.stack1.get())
+        el = self.stack2.get()
+        self.stack1.put(el)
+        while not self.stack2.empty():
+            self.stack1.put(self.stack2.get())
 
     def empty(self) -> bool:
+        while not self.stack1.empty():
+            return False
+        return True
 
 
 
