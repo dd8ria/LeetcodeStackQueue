@@ -1,13 +1,31 @@
+"""maximum frequency stack"""
 class FreqStack:
-
+    """class freqstak"""
     def __init__(self):
-        
+        self.stack = []
+        self.frequency = {}
 
     def push(self, val: int) -> None:
-        
+        """
+        push
+        """
+        if val not in self.frequency:
+            self.frequency[val] = 0
+        self.frequency[val] += 1
+        self.stack.append(val)
 
     def pop(self) -> int:
-        
+        """
+        pop
+        """
+        m = max(self.frequency.values())
+        to_pop = None
+        for i in range(len(self.stack))[::-1]:
+            if self.frequency[self.stack[i]] == m:
+                to_pop = i
+                break
+        self.frequency[self.stack[to_pop]] -= 1
+        return self.stack.pop(to_pop)
 
 
 # Your FreqStack object will be instantiated and called as such:
